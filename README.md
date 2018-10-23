@@ -36,13 +36,17 @@ Use pip to install some of these dependencies
     
     /ecommerce/v1/cart/product : form-data: username, password, productId <- do this with as many products
     
-    /ecommerce/v1/cart/user : form-data: username, password <- see items in cart
+    /ecommerce/v1/cart/user : form-data: username, password <- see items in cart **view the shopping cart of the current user**
     
     /ecommerce/v1/payment/: form-data: username, password <- payment and checkout process; removes all from cart and into orders
     
     /ecommerce/v1/cart/product/remove <- form-post: raw: {"productId":"x", "userId":"x"} <-remove one item from the cart
     
+    /ecommerce/v1/order: <- **view the purchase history of the current user**
+    
     /ecommerce/v1/account/logout: none <- logout of account
+    
+     
     
 ## POSTMAN API Documenation ##
 [Ecommerce](https://web.postman.co/collections/5404767-84525ed9-c1c4-4656-a83b-f1187a2a46a0?workspace=a8551fb5-e2e1-4bed-8669-d9be225e49f9)

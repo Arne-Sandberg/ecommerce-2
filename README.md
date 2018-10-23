@@ -1,13 +1,7 @@
 # Ecommerce 
 A Microservice-based, E-commerce webapp.
 
-Description of Architecture:
-
-Contraints to the above Arctiecture:
-
-Implementation process:
-
-Improvements of Design:
+Please read the following [EcommerceDesign Doc](EcommerceDesign.pdf) before proceeding...
 
 ## Dependencies ##
 Use pip to install some of these dependencies

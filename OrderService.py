@@ -12,7 +12,7 @@ accountLoginHost = 'http://localhost:5001/ecommerce/v1/account/login'
 accountDetailsHost = 'http://localhost:5001/ecommerce/v1/account/details'
 accountUserHost = 'http://localhost:5001/ecommerce/v1/account/users'
 
-@app.route("/ecommerce/v1/order/", methods=['GET'])
+@app.route("/ecommerce/v1/order/", methods=['POST'])
 def allorders():
     s = requests.session()
     s.post(accountLoginHost, {'email':request.form['username'],'password':request.form['password']})

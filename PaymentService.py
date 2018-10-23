@@ -74,14 +74,5 @@ def payment():
         print (msg)
     return (jsonify({'response':msg}))
 
-#-----------------------------------------------------------#
-@app.route("/payment/checkout", methods=["POST"])
-def checkout():
-    if 'email' in session:
-        loggedIn, firstName, noOfItems,_ = getLoginDetails()
-        email = session['email']
-        return render_template('payment.html', loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, error='')
-    else:
-        return redirect(home)
 if __name__ == '__main__':
     app.run(host='localhost', port=5005, debug=True,threaded=True)

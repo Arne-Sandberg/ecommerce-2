@@ -1,6 +1,14 @@
 # Ecommerce 
 A Microservice-based, E-commerce webapp.
-  
+
+Description of Architecture:
+
+Contraints to the above Arctiecture:
+
+Implementation process:
+
+Improvements of Design:
+
 ## Dependencies ##
 Use pip to install some of these dependencies
 1. Python3
@@ -19,7 +27,6 @@ Use pip to install some of these dependencies
 6. Run CartService.py
 7. Run OrderService.py
 8. Run PaymentService.py
-9. Enter localhost:80 in the browser
 
 ## Using the ecommerce app, from browsing to checkout ##
 1. Launch POSTMAN
@@ -45,3 +52,4 @@ Use pip to install some of these dependencies
     
 ## POSTMAN API Documenation ##
 [Ecommerce](https://web.postman.co/collections/5404767-84525ed9-c1c4-4656-a83b-f1187a2a46a0?workspace=a8551fb5-e2e1-4bed-8669-d9be225e49f9)
+

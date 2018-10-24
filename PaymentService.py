@@ -17,7 +17,7 @@ accountUserHost = 'http://localhost:5001/ecommerce/v1/account/users'
 removeItemsFromCartHost='http://localhost:5002/ecommerce/v1/cart/product/remove'
 
 @app.route("/ecommerce/v1/payment/", methods=["POST"])
-def payment():
+def initiatePayment():
 #get the 'user' key
 #remove all items from the 'cart'
 #add items to the order table

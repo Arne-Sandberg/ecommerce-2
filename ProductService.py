@@ -16,7 +16,7 @@ accountDetailsHost = 'http://localhost:5001/ecommerce/v1/account/details'
 accountUserHost = 'http://localhost:5001/ecommerce/v1/account/users'
 
 @app.route("/ecommerce/v1/product/", methods=["POST"])
-def addItemProduct():
+def addProduct():
     if request.method == "POST":
         name = request.form['name']
         price = float(request.form['price'])
@@ -61,7 +61,7 @@ def removeItem():
     return jsonify({'response': msg})
 
 @app.route("/ecommerce/v1/product/query", methods = ['POST'])
-def product():
+def fetchProduct():
     query = request.form['query'] #security hazard, maybe
     with sqlite3.connect('ecommercedb.db') as conn:
         cur = conn.cursor()
@@ -78,7 +78,7 @@ def product():
     return jsonify({'response': msg})
 
 @app.route("/ecommerce/v1/product/details", methods=['POST'])
-def productDescriptionProduct():
+def fetchProductDescriptionDetails():
 
     s = requests.session()
     s.post(accountLoginHost, {'email':request.form['username'],'password':request.form['password']})
@@ -105,7 +105,7 @@ def productDescriptionProduct():
     return jsonify({'data': productData, 'loggedIn' : loggedIn, 'firstName' : firstName, 'noOfItems' : noOfItems, 'isFromHome':isFromHome})
 
 @app.route("/ecommerce/v1/product/category/details", methods = ['POST'])
-def category():
+def fetchAllCategories():
 
     requery = request.form['query'] #security hazard, maybe
     with sqlite3.connect('ecommercedb.db') as conn:
@@ -120,7 +120,7 @@ def category():
     conn.close()
     return jsonify({'response': msg})
 @app.route("/ecommerce/v1/product/categories", methods=['POST'])
-def displayCategoryProduct():
+def fetchProductCategories():
     s = requests.session()
     s.post(accountLoginHost, {'email':request.form['username'],'password':request.form['password']})
     resp_logIn = s.get(accountDetailsHost)

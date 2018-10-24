@@ -15,11 +15,10 @@ accountUserHost = 'http://localhost:5001/ecommerce/v1/account/users'
 
 @app.route("/ecommerce/v1/cart/product", methods=["POST"])
 def addProductToCart():
-    print("We are here!")
     s = requests.session()
     resp =s.post(accountLoginHost, {'email':request.form['username'],'password':request.form['password']})
     resp_logIn = s.get(accountDetailsHost)
-
+    
     loggedIn = resp_logIn.json()['userInfo'][0]
     firstName = resp_logIn.json()['userInfo'][1]
     noOfItems = resp_logIn.json()['userInfo'][2]
@@ -58,7 +57,7 @@ def addProductToCart():
         return jsonify({'response':msg})
 
 @app.route("/ecommerce/v1/cart/user", methods=["POST", "GET"])
-def cartUser():
+def fetchCartInfo():
     s = requests.session()
     s.post(accountLoginHost, {'email':request.form['username'],'password':request.form['password']})
     resp_logIn = s.get(accountDetailsHost)
@@ -72,7 +71,6 @@ def cartUser():
         cur = conn.cursor()
         #Here is where you make a network request to the Product/User Service to retrieve all items and category data
         resp_cat = requests.post(accountUserHost, {'query':"SELECT userId FROM users WHERE email = '" + email + "'"})
-        print("response of post=",resp_cat.json()['response'][0].pop())
         userId = resp_cat.json()['response'][0].pop()
         print("Here is the userId=",str(userId))
         cur.execute("SELECT products.productId, products.name, products.price, products.image FROM products, kart WHERE products.productId = kart.productId AND kart.userId = " + str(userId))
@@ -83,7 +81,7 @@ def cartUser():
     return jsonify({'response': {'totalPrice': str(totalPrice), 'loggedIn': str(loggedIn), 'firstName': str(firstName), 'noOfItems':str(noOfItems)}})
 
 @app.route("/ecommerce/v1/cart/product/remove", methods=["POST", "GET"])
-def removeItemsFromCartCart():
+def removeItemsFromCart():
     dictionary = request.get_json()
 
     with sqlite3.connect('ecommercedb.db') as conn:

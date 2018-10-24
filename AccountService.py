@@ -25,7 +25,6 @@ def getLoginDetails():
             return jsonify({'userInfo': [loggedIn, firstName, noOfItems, userId, None]})
         else:
             loggedIn = True
-            #Here is where you make a network request
             cur.execute("SELECT userId, firstName FROM users WHERE email = '" + session['email'] + "'")
             userId, firstName = cur.fetchone()
             resp = requests.post(cartCountHost, {'query': "SELECT count(productId) FROM kart WHERE userId = " + str(userId)} )
@@ -35,7 +34,7 @@ def getLoginDetails():
     return jsonify({'userInfo': [loggedIn, firstName, noOfItems, userId, session['email']]})
 
 @app.route("/ecommerce/v1/account/users", methods = ["POST"])
-def category():
+def fetchUserInformation():
     loggedIn, firstName, noOfItems, userId = getUserLoginDetails()
     requery = request.form['query'] #security hazard, maybe
     with sqlite3.connect('ecommercedb.db') as conn:
@@ -116,7 +115,6 @@ def register():
                 con.rollback()
                 msg = "Error occured"
         con.close()
-        #return render_template("login.html", error=msg)
         return jsonify({'response':msg})
 
 @app.route("/ecommerce/v1/account/logout", methods=['GET'])
@@ -183,6 +181,3 @@ def getUserLoginDetails():
     return (loggedIn, firstName, noOfItems, userId)
 if __name__ == '__main__':
     app.run(host='localhost', port=5001, debug=True,threaded=True)
-
-#https://stackoverflow.com/questions/42879963/sharing-sessions-between-two-flask-servers
-#https://gist.github.com/soheilhy/8b94347ff8336d971ad0

@@ -13,7 +13,7 @@ accountDetailsHost = 'http://localhost:5001/ecommerce/v1/account/details'
 accountUserHost = 'http://localhost:5001/ecommerce/v1/account/users'
 
 @app.route("/ecommerce/v1/order/", methods=['POST'])
-def allorders():
+def getAllOrders():
     s = requests.session()
     s.post(accountLoginHost, {'email':request.form['username'],'password':request.form['password']})
     resp_logIn = s.get(accountDetailsHost)
@@ -32,7 +32,6 @@ def allorders():
         itemData = cur.fetchall()
     orderData = parse(itemData)
     print (orderData)
-    #return render_template("orders.html", orderData=orderData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
     return jsonify({'orderData':orderData, 'loggedIn':loggedIn, 'firstName':firstName, 'noOfItems':noOfItems})
 def parse(data):
     ans = []
